@@ -1,5 +1,8 @@
 #include "room.h"
 
+Room::~Room() {
+}
+
 int Room::getTransition() {
   return transition;
 }

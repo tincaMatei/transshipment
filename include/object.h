@@ -17,6 +17,7 @@ private:
 public:
   // Object constructor
   Object();
+  ~Object();
   
   // Marks the object as inactive
   void selfDestruct();
@@ -30,6 +31,7 @@ class DisplayableObject : public Object {
   float depth;
 public:
   DisplayableObject();
+  ~DisplayableObject();
   
   // Set the depth of an object
   // If the depth is higher, it will be rendered later
@@ -42,6 +44,8 @@ public:
 // Object's mouse interface
 class MouseObject : public Object {
 public:
+  ~MouseObject();
+
   Point mousePointer;
   void setCursorPosition(float x, float y);
   
@@ -62,6 +66,8 @@ public:
 // Object's keyboard interface
 class KeyboardObject : public Object {
 public:
+  ~KeyboardObject();
+  
   // Stuff to do when the given key is pressed
   // If repeat is true, that means that we were holding the key down
   // and the press was counted twice
@@ -80,6 +86,8 @@ public:
 // Object's idling process
 class IdleObject: public Object {
 public:
+  ~IdleObject();
+  
   // This will be called at the end of every game loop
   virtual void update() = 0;
 };

@@ -26,6 +26,8 @@ protected:
   // runGameLoop() returns true
   int transition;
 public:
+  ~Room();
+
   // Runs one game loop
   // Should return false if we should change to another room
   virtual bool runGameLoop() = 0;
