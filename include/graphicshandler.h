@@ -2,6 +2,9 @@
 #define __GRAPHICSHANDLER_H
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
+#include <string>
 
 // Small interface that draws colors
 class RectangleDrawer {
@@ -21,6 +24,48 @@ public:
                        unsigned char r, 
                        unsigned char g,
                        unsigned char b);
+};
+
+class FontRenderer {
+private:
+  TTF_Font* usedFont;
+public:
+  FontRenderer(const char* filename, int fontsize);
+  ~FontRenderer();
+  
+  static std::string inttostring(int x);
+  
+  void renderText(SDL_Renderer* renderer, float _x, float _y, 
+                  std::string text);
+};
+
+class TileSetRenderer {
+private:
+  SDL_Texture* texture;
+  
+  int tileWidth, tileHeight;
+public:
+  TileSetRenderer(const char* filename, SDL_Renderer* renderer,
+                  int _tw, int _th);
+  ~TileSetRenderer();
+  
+  void renderTexture(SDL_Renderer* renderer, int l, int c, SDL_Rect target);
+};
+
+struct TextureContext {
+  TileSetRenderer* mapTiles;
+  TileSetRenderer* itemSkins;
+  TileSetRenderer* plusButton;
+  TileSetRenderer* minusButton;
+  TileSetRenderer* crossButton;
+  TileSetRenderer* guiWindow;
+  TileSetRenderer* playmenu;
+  TileSetRenderer* quitmenu;
+  TileSetRenderer* cancelmenu;
+  TileSetRenderer* wholemenu;
+  
+  TextureContext(SDL_Renderer* renderer);
+  ~TextureContext();
 };
 
 #endif

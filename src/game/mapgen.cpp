@@ -5,10 +5,10 @@
 int splitWidth[5]  = {4, 5, 4, 4, 5};
 int splitHeight[3] = {5, 5, 4};
 
+bool taken[15];
+
 int dl[] = {0, 1, 0, -1};
 int dc[] = {1, 0,-1,  0};
-
-bool taken[15];
 
 void initMapGen() {
   for(int i = 0; i < 15; ++i)
@@ -23,7 +23,7 @@ std::vector<std::vector<char> > generateMap(int islands) {
                                           std::vector<char>(MAX_MAP_CELL_WIDTH, 0));
   
   for(int i = 0; i < MAX_MAP_CELL_HEIGHT; ++i)
-    gameMap[i][0] = gameMap[i][1] = 1; // Port
+    gameMap[i][0] = 1; // Port
   
   for(int i = 0; i < islands; ++i) {
     int lIsland, cIsland;

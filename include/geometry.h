@@ -43,6 +43,8 @@ struct Polygon {
   // and radius r and n vertices
   Polygon(float x, float y, float r, int n);
   
+  ~Polygon();
+  
   // Translates the polygon with the vector (x, y)
   void translate(float x, float y);
 

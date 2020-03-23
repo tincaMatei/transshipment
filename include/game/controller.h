@@ -7,7 +7,14 @@
 #include <vector>
 #include "game/cell.h"
 #include "game/standardship.h"
+#include "game/shipgui.h"
 #include "timer.h"
+#include "game/wallet.h"
+#include "game/requester.h"
+#include "game/shop.h"
+#include "game/settingsmenu.h"
+#include "game/endgamemenu.h"
+#include "graphicshandler.h"
 
 class Controller : public DisplayableObject,
                    public MouseObject,
@@ -19,12 +26,17 @@ private:
   // stopwatch used for measuring times
   Timer stopWatch;
   
-  // Two test ships
-  StandardShip* testShip;
-  StandardShip* testShip2;
+  std::vector<StandardShip*> ships;
+  ShipGui* shipGui;
+  Requester* requester;
+  Wallet* wallet;
+  Shop* shop;
+  SettingsMenu* settingsMenu;
+  EndGameMenu* endGameMenu;
   
+  bool quit, restart, globalFreeze;
 public:
-  Controller();
+  Controller(TextureContext* textureContext);
   ~Controller();
   
   void display(SDL_Renderer* renderer);
@@ -42,6 +54,10 @@ public:
   void keyHold(const Uint8* state);
   
   void update();
+  
+  bool shouldClose();
+  
+  bool shouldRestart();
 };
 
 #endif

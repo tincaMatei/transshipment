@@ -12,9 +12,15 @@ enum Action {
   GO_DOWN = 4
 };
 
+const int MAX_RESOURCES = 6;
+
 enum Resource {
   IRON,
-  COPPER
+  COPPER,
+  ICE_ROCK,
+  FLAME_ROCK,
+  PETROL,
+  URANIUM
 };
 
 class Ship : public DisplayableObject,
@@ -23,10 +29,12 @@ class Ship : public DisplayableObject,
 protected:
   // Coordinates of the ship
   int l, c;
+  // Fuel properties
+  int fuel, maxFuel;
   // Elapsed time since last move
   float elapsedTime;
   // Speed of the ship
-  float speed;
+  float speed, unloadSpeed;
   // Properties of the ship
   // If we set the path of a ship, all other ships are freezed from moving
   bool freezed, destroyed;
@@ -35,8 +43,12 @@ protected:
   // The intended path of the ship aka the path drawn when trying to
   // decide the path
   std::deque<int> intendedPath;
+  // Ship total cargo size
+  int totalAmmount, totalCapacity;
+  // Cargo of the ship
+  int cargo[MAX_RESOURCES], request[MAX_RESOURCES];
 public:
-  Ship(float _speed);
+  Ship(float _speed, float _unloadSpeed, int _maxFuel, int _capacity);
   ~Ship();
   // Add time to elapsedTime
   void addTime(float ammount);
@@ -45,9 +57,21 @@ public:
   // Check if the ship freezes the game
   bool isFreezed();
   // Destroy the ship 
-  void destroyShip();
+  virtual void destroyShip();
   // Check if the ship is destroyed
   bool isDestroyed();
+  
+  int getCargo(int poz);
+  
+  int getRequest(int poz);
+  
+  int getFuel();
+  
+  int getMaxFuel();
+  
+  int getCargoOccupied();
+  
+  int getCargoSize();
   
   virtual void display(SDL_Renderer* renderer) = 0;
   
@@ -62,6 +86,10 @@ public:
   virtual void loadResource(Resource res, int ammount) = 0;
   
   virtual void unloadResource(Resource res, int ammount) = 0;
+  
+  virtual void addRequest(Resource res, int ammount);
+  
+  virtual void removeRequest(Resource res, int ammount);
 };
 
 #endif

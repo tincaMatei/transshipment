@@ -22,7 +22,7 @@ BDIR=bin
 TESTDIR=tests
 
 # Compilation flags
-FLAGS=-Wall -std=c++11 -O2 -I $(IDIR) -lSDL2
+FLAGS=-Wall -std=c++17 -O2 -I $(IDIR) -lSDL2 -lSDL2_ttf -lSDL2_image
 
 # List of all sources and objects
 SRC=$(shell find $(SDIR) -type f -name *.$(SRCEXT))

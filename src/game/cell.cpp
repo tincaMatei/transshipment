@@ -2,65 +2,49 @@
 #include "game/cell.h"
 #include "debugtools.h"
 
-Cell::Cell(int _l, int _c) {
+Cell::Cell(int _l, int _c, TextureContext* _textureContext) : 
+      Button(0.0f, 0.0f, 0.0f, 0.0f) {
   l = _l;
   c = _c;
-  
-  float x1, x2, y1, y2;
   
   x1 = 16.0f + _c * 32.0f;
   x2 = x1 + 32.0f - 1.0f;
   y1 = 136.0f + 32.0f * _l;
   y2 = y1 + 32.0f - 1.0f;
   
+  // God forgive
+  delete body;
   body = new Polygon((x1 + x2) / 2.0f, (y1 + y2) / 2.0f, 31.0f, 31.0f);
-  hovering = false;
   
   ship = NULL;
+  island = NULL;
+  hovering = false;
   shipwreck = false;
+  textureContext = _textureContext;
+  
+  lT = cT = 0;
 }
 
 Cell::~Cell() {
   ship = NULL;
   delete body;
   body = NULL;
+  island = NULL;
 }
 
 void Cell::display(SDL_Renderer* renderer) {
-  if(shipwreck) {
-    SDL_SetRenderDrawColor(renderer, 0xff, 0x00, 0x00, 0xff); 
-  } else {
-    if(type == WATER)
-      SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0xff, 0xff);
-    else if(type == ISLAND)
-      SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0x00, 0xff);
-    else if(type == PORT)
-      SDL_SetRenderDrawColor(renderer, 0xff, 0x3f, 0x00, 0x00);
-    
-    if(hovering)
-      SDL_SetRenderDrawColor(renderer, 0x00, 0xff, 0x00, 0xff);
+  textureContext->mapTiles->
+                  renderTexture(renderer, lT, cT, {(int)x1, (int)y1, 32, 32});
+
+  if(hovering) {
+    SDL_SetRenderDrawColor(renderer, 0x00, 0xff, 0x00, 0xff);
+    debugPolygon(renderer, body);
   }
-  debugPolygon(renderer, body);
 }
 
-void Cell::mouseButtonPress(int key) {
-}
-
-void Cell::mouseButtonRelease(int key) {
-}
-
-void Cell::mouseMotion(float _x, float _y) {
-  mousePointer = {_x, _y};
-  
-  Polygon* dot = new Polygon(mousePointer.x, mousePointer.y);
-  
-  if(body->collides(dot))
-    hovering = true;
-  else
-    hovering = false;
-  
-  delete dot;
-  dot = NULL;
+void Cell::assignTile(int _lT, int _cT) {
+  lT = _lT;
+  cT = _cT;
 }
 
 bool Cell::isHovering() {
@@ -92,10 +76,29 @@ void Cell::setShip(Ship* _ship) {
   }
 }
 
+void Cell::markShipwreck() {
+  ship = NULL;
+  shipwreck = true;
+}
+
 Ship* Cell::getShip() {
   return ship;
 }
 
 bool Cell::getShipwreck() {
   return shipwreck;
+}
+
+void Cell::setIsland(Island* _island) {
+  island = _island;
+}
+
+bool Cell::resourceAvailable(Resource res) {
+  if(island != NULL)
+    return island->resourceAvailable(res);
+  return false;
+}
+
+Island* Cell::getIsland() {
+  return island;
 }

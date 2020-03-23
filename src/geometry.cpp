@@ -34,6 +34,10 @@ Polygon::Polygon(float x, float y, float r, int n) {
     angle = angle + angleGrowth;
   }
 }
+#include <cstdio>
+
+Polygon::~Polygon() {
+}
 
 void Polygon::translate(float x, float y) {
   for(unsigned int i = 0; i < polygon.size(); ++i)
