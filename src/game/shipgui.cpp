@@ -36,7 +36,7 @@ ShipGui::~ShipGui() {
 }
 
 void ShipGui::displayShip(SDL_Renderer* renderer) {
-  SDL_Rect rect = {12, 12, 800 - 12 - 98, 2 * 24 + 64};
+  SDL_Rect rect = {12, 12, 690, 112};
   textureContext->guiWindow->renderTexture(renderer, 0, 0, rect);
   
   for(int i = 0; i < MAX_RESOURCES; ++i) {
@@ -53,7 +53,7 @@ void ShipGui::displayShip(SDL_Renderer* renderer) {
     
     textureContext->itemSkins->renderTexture(renderer, i, 1, rect);
     
-    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xff);
+    SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
     
     std::string a, b;
     
@@ -64,7 +64,7 @@ void ShipGui::displayShip(SDL_Renderer* renderer) {
   }
   
         
-  SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xff);
+  SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
   
   std::string a, b;
   a = FontRenderer::inttostring(targetShip->getCargoOccupied());
@@ -98,7 +98,7 @@ void ShipGui::displayIsland(SDL_Renderer* renderer) {
     rect = {x1, y1, 64, 64};
     SDL_RenderFillRect(renderer, &rect);
     
-    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xff);
+    SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
     
     if(targetIsland->getType() == SUPPLIER &&
        targetIsland->resourceAvailable(Resource(i))) {
@@ -113,20 +113,26 @@ void ShipGui::displayIsland(SDL_Renderer* renderer) {
         textureContext->itemSkins->renderTexture(renderer, i, 1, rect);
     } else if(targetIsland->getType() == REQUESTER &&
               targetIsland->getRequest(Resource(i))) {
-      std::string a;
-    
-      a = FontRenderer::inttostring(targetIsland->getRequest(Resource(i)));
       
+      std::string a;
+      a = FontRenderer::inttostring(targetIsland->getRequest(Resource(i)));
       fontRenderer->renderText(renderer, x1 + 32, y1 + 64 + 12, a);
+      
       if(targetIsland->getRequest(Resource(i)))
         textureContext->itemSkins->renderTexture(renderer, i, 1, rect);
     } else if(targetIsland->getType() == PORT) {
       textureContext->itemSkins->renderTexture(renderer, i, 0, rect);
       buyButton[i]->display(renderer);
+      
+      std::string a;
+      a = FontRenderer::inttostring(getShipPrice(i));
+      fontRenderer->renderText(renderer, x1 + 32, y1 + 64 + 12, a + "$");
+    } else if(targetIsland->getType() == GASSTATION) {
+      textureContext->itemSkins->renderTexture(renderer, 4, 1, rect);
     }
   }
   
-  SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xff);
+  SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
   
   if(targetIsland->getType() != PORT)
     fontRenderer->renderText(renderer, 45.0f + 25.0f, 12.0f + 24.0f * 3,
@@ -143,7 +149,6 @@ void ShipGui::displayIsland(SDL_Renderer* renderer) {
       std::string a = FontRenderer::inttostring((int)(rem / 1000));  
       
       fontRenderer->renderText(renderer, 45.0f + 25.0f, 12.0f + 24.0f, a);
-      
     }
     typeIsland = "Client";
   } else
@@ -159,7 +164,7 @@ void ShipGui::displayStats(SDL_Renderer* renderer) {
   SDL_Rect rect = {12, 12, 800 - 12 - 98, 2 * 24 + 64};
   textureContext->guiWindow->renderTexture(renderer, 0, 0, rect);
   
-  SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xff);
+  SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
   
   fontRenderer->renderText(renderer, 45.0f + 25.0f, 12.0f + 24.0f * 3,
                                    "Balance:");

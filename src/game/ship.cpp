@@ -1,5 +1,11 @@
 #include "game/ship.h"
 
+int shipPrice[6] = {2000, 3500, 3500, 4000, 8000, 7000};
+
+int getShipPrice(int id) {
+  return shipPrice[id];
+} 
+
 Ship::Ship(float _speed, float _unloadSpeed, int _maxFuel, int _capacity) {
   elapsedTime = 0.0f;
   

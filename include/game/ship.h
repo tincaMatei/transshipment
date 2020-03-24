@@ -92,4 +92,6 @@ public:
   virtual void removeRequest(Resource res, int ammount);
 };
 
+int getShipPrice(int id);
+
 #endif

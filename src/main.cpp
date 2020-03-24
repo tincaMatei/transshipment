@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
 #include "game/mapgen.h"
 #include "game/controller.h"
 #include "room.h"
@@ -12,10 +13,11 @@
 SDL_Window* window;
 SDL_Renderer* renderer;
 RoomContext roomContext;
+Mix_Music* bgsong;
 
 void init() {
   
-  if(SDL_Init(SDL_INIT_VIDEO) != 0) {
+  if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
     SDL_Log("Unable to initialize SDL: %s\n", SDL_GetError());
   }
   
@@ -31,6 +33,12 @@ void init() {
   
   if(!IMG_Init(IMG_INIT_PNG))
     SDL_Log("Unable to start SDL_image: %s\n", IMG_GetError());
+  
+  if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+    SDL_Log("Unable to start SDL_mixed: %s\n", Mix_GetError());
+  bgsong = Mix_LoadMUS("media/bgmusic.mp3");
+  if(bgsong == NULL)
+    SDL_Log("Unable to load media/bgmusic.mp3: %s\n", Mix_GetError);
 }
 
 void deinit() {
@@ -39,6 +47,9 @@ void deinit() {
   
   renderer = NULL;
   window = NULL;
+  
+  Mix_FreeMusic(bgsong);
+  bgsong = NULL;
   
   TTF_Quit();
   SDL_Quit();
@@ -58,6 +69,9 @@ int main(int argc, char** argv) {
   roomContext.pushRoom(gameRoom);
   
   bool quit = false;
+  
+  Mix_VolumeMusic(MIX_MAX_VOLUME);
+  Mix_PlayMusic(bgsong, -1);
   
   while(!quit) {    
     int lag = 0, lastT = SDL_GetTicks();

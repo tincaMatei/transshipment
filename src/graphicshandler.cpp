@@ -123,11 +123,13 @@ TextureContext::TextureContext(SDL_Renderer* renderer) {
   plusButton = new TileSetRenderer("media/plusbutton.png", renderer, 16, 16);
   minusButton = new TileSetRenderer("media/minusbutton.png", renderer, 16, 16);
   crossButton = new TileSetRenderer("media/crossbutton.png", renderer, 16, 16);
-  guiWindow = new TileSetRenderer("media/gui.png", renderer, 100, 40);
+  guiWindow = new TileSetRenderer("media/shipmenu.png", renderer, 690, 112);
   playmenu = new TileSetRenderer("media/playmenu.png", renderer, 100, 40);
   quitmenu = new TileSetRenderer("media/quitmenu.png", renderer, 100, 40);
   cancelmenu = new TileSetRenderer("media/cancelmenu.png", renderer, 100, 40);
   wholemenu = new TileSetRenderer("media/menu.png", renderer, 800, 600);
+  settingsmenugui = new TileSetRenderer("media/settingsmenu.png", renderer, 400, 500);
+  endgamegui = new TileSetRenderer("media/endgamemenu.png", renderer, 400, 200);
 }
 
 TextureContext::~TextureContext() {
@@ -141,6 +143,10 @@ TextureContext::~TextureContext() {
   delete quitmenu;
   delete cancelmenu;
   delete wholemenu;
+  delete settingsmenugui;
+  delete endgamegui;
+  endgamegui = NULL;
+  settingsmenugui = NULL;
   mapTiles = NULL;
   itemSkins = NULL;
   plusButton = NULL;

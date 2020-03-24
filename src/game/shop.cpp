@@ -25,28 +25,24 @@ void Shop::addShip(int shipId) {
   if(l == MAX_MAP_CELL_HEIGHT)
     return;
   
+  wallet->loseMoney(getShipPrice(shipId));
+  
   if(shipId == 0) {
-    wallet->loseMoney(2000);
     boughtShips.push_back(
       new StandardShip(500.0f, 500.0f, l, c, gameMap, 5, 70, wallet, textureContext, shipId, 0));
   } else if(shipId == 1) {
-    wallet->loseMoney(3500);
     boughtShips.push_back(
       new StandardShip(500.0f, 500.0f, l, c, gameMap, 10, 70, wallet, textureContext, shipId, 0));
   } else if(shipId == 2) {
-    wallet->loseMoney(3500);
     boughtShips.push_back(
       new StandardShip(250.0f, 500.0f, l, c, gameMap, 5, 70, wallet, textureContext, shipId, 0));
   } else if(shipId == 3) {
-    wallet->loseMoney(4000);
     boughtShips.push_back(
       new StandardShip(500.0f, 100.0f, l, c, gameMap, 20, 70, wallet, textureContext, shipId, 0));
   } else if(shipId == 4) {
-    wallet->loseMoney(8000);
     boughtShips.push_back(
       new StandardShip(100.0f, 500.0f, l, c, gameMap, 5, 100, wallet, textureContext, shipId, 0));
   } else {
-    wallet->loseMoney(7000);
     boughtShips.push_back(
       new StandardShip(500.0f, 500.0f, l, c, gameMap, 5, 150, wallet, textureContext, shipId, 0));
   }

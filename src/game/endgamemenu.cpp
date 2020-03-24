@@ -4,8 +4,8 @@ EndGameMenu::EndGameMenu(Wallet* _wallet, TextureContext* _textureContext) {
   quit = restart = active = false;
   
   textureContext = _textureContext;
-  restartButton = new Button(400, 300, 80, 40, textureContext->playmenu);
-  quitButton  = new Button(400, 350, 80, 40, textureContext->quitmenu);
+  restartButton = new Button(400, 300, 100, 40, textureContext->playmenu);
+  quitButton  = new Button(400, 350, 100, 40, textureContext->quitmenu);
   
   buttons.push_back(restartButton);
   buttons.push_back(quitButton);
@@ -30,7 +30,7 @@ EndGameMenu::~EndGameMenu() {
 void EndGameMenu::display(SDL_Renderer* renderer) {
   if(active) {
     SDL_Rect rect = {200, 200, 400, 200};
-    textureContext->guiWindow->renderTexture(renderer, 0, 0, rect);
+    textureContext->endgamegui->renderTexture(renderer, 0, 0, rect);
     
     SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
     fontRenderer->renderText(renderer, 400, 230, "You went bankrupt!");

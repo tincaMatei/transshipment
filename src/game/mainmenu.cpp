@@ -2,8 +2,8 @@
 
 MainMenu::MainMenu(TextureContext* _textureContext) {
   textureContext = _textureContext;
-  playButton = new Button(400, 300, 200, 60, textureContext->playmenu);
-  quitButton = new Button(400, 400, 200, 60, textureContext->quitmenu);
+  playButton = new Button(400, 300, 200, 80, textureContext->playmenu);
+  quitButton = new Button(400, 400, 200, 80, textureContext->quitmenu);
   
   buttons.push_back(playButton);
   buttons.push_back(quitButton);
