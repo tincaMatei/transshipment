@@ -31,7 +31,13 @@ If you hold more than 5 uranium pieces, the ship will be destroyed due to a nucl
 
 # How to compile?
 
-Right now it's not the best moment to ask >:(
+Install libSDL2-dev, libSDL2-image-dev, -ibSDL2-ttf-dev and libSDL2-mixer-dev. Clone the repository and run
+
+> make transshipment
+
+To run the program, do
+
+> ./bin/transshipment
 
 # Things used
 
