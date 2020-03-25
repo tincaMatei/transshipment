@@ -21,19 +21,9 @@ Map::Map(Wallet* _wallet, TextureContext* textureContext) {
       cellMap[l][c] = new Cell(l, c, textureContext);
       if(gameMap[l][c] == 0) {
         cellMap[l][c]->type = WATER;
-        cellMap[l][c]->assignTile(1, 2);
       } else {
         cellMap[l][c]->type = ISLAND;
         cellMap[l][c]->setIsland(islands[gameMap[l][c] - 1]);
-        
-        if(cellMap[l][c]->getIsland()->getType() == PORT)
-          cellMap[l][c]->assignTile(3, 2);
-        else if(cellMap[l][c]->getIsland()->getType() == SUPPLIER)
-          cellMap[l][c]->assignTile(5, 2);
-        else if(cellMap[l][c]->getIsland()->getType() == GASSTATION)
-          cellMap[l][c]->assignTile(5, 0);
-        else if(cellMap[l][c]->getIsland()->getType() == REQUESTER)
-          cellMap[l][c]->assignTile(5, 1);
       }
     }
   
