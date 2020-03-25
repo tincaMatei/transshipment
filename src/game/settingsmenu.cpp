@@ -1,8 +1,10 @@
 #include "game/settingsmenu.h"
 
-SettingsMenu::SettingsMenu(TextureContext* _textureContext) {
+SettingsMenu::SettingsMenu(TextureContext* _textureContext, int *volume) {
   active = false;
   quit = false;
+  
+  volumeHandler = new VolumeHandler(volume, _textureContext);
   
   textureContext = _textureContext;
   closeButton = new Button(400, 450, 100, 40, textureContext->cancelmenu);
@@ -12,7 +14,9 @@ SettingsMenu::SettingsMenu(TextureContext* _textureContext) {
 SettingsMenu::~SettingsMenu() {
   delete closeButton;
   delete quitButton;
+  delete volumeHandler;
   
+  volumeHandler = NULL;
   textureContext = NULL;
   closeButton = quitButton = NULL;
 }
@@ -24,6 +28,7 @@ void SettingsMenu::display(SDL_Renderer* renderer) {
     
     closeButton->display(renderer);
     quitButton->display(renderer);
+    volumeHandler->display(renderer);
   }
 }
 
@@ -31,6 +36,7 @@ void SettingsMenu::mouseButtonPress(int key) {
   if(active) {
     closeButton->mouseButtonPress(key);
     quitButton->mouseButtonPress(key);
+    volumeHandler->mouseButtonPress(key);
   }
 }
 
@@ -38,6 +44,7 @@ void SettingsMenu::mouseButtonRelease(int key) {
   if(active) {
     closeButton->mouseButtonRelease(key);
     quitButton->mouseButtonRelease(key);
+    volumeHandler->mouseButtonRelease(key);
   }
 }
 
@@ -45,6 +52,7 @@ void SettingsMenu::mouseMotion(float _x, float _y) {
   if(active) {
     closeButton->mouseMotion(_x, _y);
     quitButton->mouseMotion(_x, _y);
+    volumeHandler->mouseMotion(_x, _y);
   }
 }
 
@@ -58,6 +66,8 @@ void SettingsMenu::update() {
       active = false;
       quit = true;
     }
+    
+    volumeHandler->update();
   }
 }
 

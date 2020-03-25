@@ -4,6 +4,7 @@
 #include "object.h"
 #include "game/button.h"
 #include "graphicshandler.h"
+#include "game/volumehandler.h"
 
 class SettingsMenu : public DisplayableObject, 
                      public MouseObject,
@@ -15,8 +16,10 @@ private:
   Button* quitButton;
   
   TextureContext* textureContext;
+  
+  VolumeHandler* volumeHandler;
 public:
-  SettingsMenu(TextureContext* _textureContext);
+  SettingsMenu(TextureContext* _textureContext, int *volume);
   ~SettingsMenu();
   
   void display(SDL_Renderer* renderer);
