@@ -9,8 +9,9 @@ class GameRoom : public Room {
 private:
   Controller* controller;
   TextureContext* textureContext;
+  int *volume;
 public:
-  GameRoom(TextureContext* _textureContext);
+  GameRoom(TextureContext* _textureContext, int *_volume);
   ~GameRoom();
   
   void initialize();

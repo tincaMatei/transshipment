@@ -44,7 +44,7 @@ void Shop::addShip(int shipId) {
       new StandardShip(100.0f, 500.0f, l, c, gameMap, 5, 100, wallet, textureContext, shipId, 0));
   } else {
     boughtShips.push_back(
-      new StandardShip(500.0f, 500.0f, l, c, gameMap, 5, 150, wallet, textureContext, shipId, 0));
+      new StandardShip(300.0f, 300.0f, l, c, gameMap, 10, 150, wallet, textureContext, shipId, 0));
   }
 }
 

@@ -130,6 +130,9 @@ TextureContext::TextureContext(SDL_Renderer* renderer) {
   wholemenu = new TileSetRenderer("media/menu.png", renderer, 800, 600);
   settingsmenugui = new TileSetRenderer("media/settingsmenu.png", renderer, 400, 500);
   endgamegui = new TileSetRenderer("media/endgamemenu.png", renderer, 400, 200);
+  volumedot = new TileSetRenderer("media/volumedot.png", renderer, 8, 8);
+  helpmenu = new TileSetRenderer("media/helpmenu.png", renderer, 800, 600);
+  instructionsmenu = new TileSetRenderer("media/instructionmenu.png", renderer, 100, 40);
 }
 
 TextureContext::~TextureContext() {
@@ -145,6 +148,12 @@ TextureContext::~TextureContext() {
   delete wholemenu;
   delete settingsmenugui;
   delete endgamegui;
+  delete volumedot;
+  delete instructionsmenu;
+  delete helpmenu;
+  instructionsmenu = NULL;
+  helpmenu = NULL;
+  volumedot = NULL;
   endgamegui = NULL;
   settingsmenugui = NULL;
   mapTiles = NULL;

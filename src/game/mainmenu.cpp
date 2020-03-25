@@ -3,22 +3,26 @@
 MainMenu::MainMenu(TextureContext* _textureContext) {
   textureContext = _textureContext;
   playButton = new Button(400, 300, 200, 80, textureContext->playmenu);
-  quitButton = new Button(400, 400, 200, 80, textureContext->quitmenu);
-  
+  helpButton = new Button(400, 400, 200, 80, textureContext->instructionsmenu);
+  quitButton = new Button(400, 500, 200, 80, textureContext->quitmenu);
+
   buttons.push_back(playButton);
+  buttons.push_back(helpButton);
   buttons.push_back(quitButton);
 }
 
 MainMenu::~MainMenu() {
   delete playButton;
   delete quitButton;
+  delete helpButton;
   
-  playButton = quitButton = NULL;
+  playButton = quitButton = helpButton = NULL;
 }
 
 void MainMenu::initialize() {
   playButton->resetButton();
   quitButton->resetButton();
+  helpButton->resetButton();
 }
 
 void MainMenu::render(SDL_Renderer* renderer) {
@@ -26,6 +30,7 @@ void MainMenu::render(SDL_Renderer* renderer) {
   textureContext->wholemenu->renderTexture(renderer, 0, 0, rect);
   playButton->display(renderer);
   quitButton->display(renderer);
+  helpButton->display(renderer);
 }
 
 bool MainMenu::runGameLoop() {
@@ -51,6 +56,9 @@ bool MainMenu::runGameLoop() {
     return false;
   } else if(quitButton->isPressed()) {
     transition = -1;
+    return false;
+  } else if(helpButton->isPressed()) {
+    transition = HELP_ROOM;
     return false;
   }
   

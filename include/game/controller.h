@@ -36,7 +36,7 @@ private:
   
   bool quit, restart, globalFreeze;
 public:
-  Controller(TextureContext* textureContext);
+  Controller(TextureContext* textureContext, int *volume);
   ~Controller();
   
   void display(SDL_Renderer* renderer);

@@ -59,8 +59,8 @@ void Cell::setShip(Ship* _ship) {
   if(ship == NULL) {
     ship = _ship;
     if(ship != NULL && shipwreck) {
-      ship->destroyShip();
-      ship = NULL;
+      //ship->destroyShip();
+      //ship = NULL;
     } else if(ship != NULL && type != WATER) {
       ship->destroyShip();
       ship = NULL;

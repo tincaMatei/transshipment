@@ -15,7 +15,8 @@ const int EXIT_ROOM = -1;
 // The id of each room we use in the game
 enum RoomIds {
   MENU_ROOM,
-  GAME_ROOM
+  GAME_ROOM,
+  HELP_ROOM
 };
 
 // Instance that holds informations about other objects

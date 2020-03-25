@@ -1,6 +1,6 @@
 #include "game/ship.h"
 
-int shipPrice[6] = {2000, 3500, 3500, 4000, 8000, 7000};
+int shipPrice[6] = {2000, 3500, 3500, 4000, 8000, 10000};
 
 int getShipPrice(int id) {
   return shipPrice[id];

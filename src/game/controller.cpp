@@ -1,13 +1,16 @@
 #include "game/controller.h"
+#include "game/aesthetics.h"
 
-Controller::Controller(TextureContext* textureContext) {
+Controller::Controller(TextureContext* textureContext, int *volume) {
   wallet = new Wallet(10000);
   gameMap = new Map(wallet, textureContext);
   shipGui = new ShipGui(wallet, textureContext);
   requester = new Requester(wallet, gameMap->getIslands());
   shop = new Shop(wallet, gameMap, shipGui->getButtons(), textureContext);
-  settingsMenu = new SettingsMenu(textureContext);
+  settingsMenu = new SettingsMenu(textureContext, volume);
   endGameMenu = new EndGameMenu(wallet, textureContext);
+  
+  Aesthetics::aestheticize(gameMap);
   
   quit = restart = globalFreeze = false;
   

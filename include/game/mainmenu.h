@@ -11,8 +11,10 @@ class MainMenu : public Room {
 private:
   Button* playButton;
   Button* quitButton;
+  Button* helpButton;
   
   std::vector<Button*> buttons;
+  
   TextureContext* textureContext;
 public:
   MainMenu(TextureContext* _textureContext);

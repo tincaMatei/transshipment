@@ -9,6 +9,7 @@
 #include "graphicshandler.h"
 #include "game/mainmenu.h"
 #include "game/gameroom.h"
+#include "game/helproom.h"
 
 SDL_Window* window;
 SDL_Renderer* renderer;
@@ -61,17 +62,22 @@ int main(int argc, char** argv) {
   
   TextureContext* textureContext = new TextureContext(renderer);
   
+  Mix_VolumeMusic(MIX_MAX_VOLUME);
+  int volume = 10;
+  Mix_PlayMusic(bgsong, -1);
+  
   MainMenu* mainMenuRoom = new MainMenu(textureContext);
-  GameRoom* gameRoom = new GameRoom(textureContext);
+  GameRoom* gameRoom = new GameRoom(textureContext, &volume);
+  HelpRoom* helpRoom = new HelpRoom(textureContext);
+  
   Room* currentRoom = mainMenuRoom;
   
   roomContext.pushRoom(currentRoom);
   roomContext.pushRoom(gameRoom);
+  roomContext.pushRoom(helpRoom);
   
   bool quit = false;
   
-  Mix_VolumeMusic(MIX_MAX_VOLUME);
-  Mix_PlayMusic(bgsong, -1);
   
   while(!quit) {    
     int lag = 0, lastT = SDL_GetTicks();

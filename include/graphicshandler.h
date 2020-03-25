@@ -65,6 +65,9 @@ struct TextureContext {
   TileSetRenderer* wholemenu;
   TileSetRenderer* settingsmenugui;
   TileSetRenderer* endgamegui;
+  TileSetRenderer* volumedot;
+  TileSetRenderer* helpmenu;
+  TileSetRenderer* instructionsmenu;
   
   TextureContext(SDL_Renderer* renderer);
   ~TextureContext();

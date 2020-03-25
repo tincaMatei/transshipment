@@ -1,8 +1,9 @@
 #include "game/gameroom.h"
 
-GameRoom::GameRoom(TextureContext* _textureContext) {
+GameRoom::GameRoom(TextureContext* _textureContext, int *_volume) {
   controller = NULL;
   textureContext = _textureContext;
+  volume = _volume;
 }
 
 GameRoom::~GameRoom() {
@@ -17,7 +18,7 @@ void GameRoom::initialize() {
     delete controller;
     controller = NULL;
   }
-  controller = new Controller(textureContext);
+  controller = new Controller(textureContext, volume);
 }
 
 bool GameRoom::runGameLoop() {
