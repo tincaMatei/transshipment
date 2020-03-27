@@ -4,7 +4,7 @@ Game I made for this game jam: https://itch.io/jam/mini-jam-50-islands
 
 # How to compile on Linux?
 
-Install libSDL2-dev, libSDL2-image-dev, -ibSDL2-ttf-dev and libSDL2-mixer-dev. Clone the repository and run
+Install libSDL2-dev, libSDL2-image-dev, libSDL2-ttf-dev and libSDL2-mixer-dev. Clone the repository and run
 
 > make transshipment
 
